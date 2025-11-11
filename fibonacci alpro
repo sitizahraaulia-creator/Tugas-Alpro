@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class FibonacciRecursiveSum {
+
+    // Metode rekursif untuk menghitung nilai Fibonacci ke-n
+    public static int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            // F(n) = F(n-1) + F(n-2)
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+
+    // Metode rekursif untuk menghitung total penjumlahan deret Fibonacci hingga suku ke-n
+    public static int sumFibonacci(int n) {
+        if (n <= 0) {
+            return 0; // Kasus dasar: jumlah deret 0 adalah 0
+        } else {
+            // Jumlah deret hingga suku ke-n adalah F(n) + Jumlah deret hingga suku ke-(n-1)
+            return fibonacci(n) + sumFibonacci(n - 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // Input jumlah deret yang diinginkan
+        System.out.print("Jumlah deret fibonacci (N) : ");
+        int N = input.nextInt();
+        
+        if (N < 0) {
+            System.out.println("Input tidak valid. Jumlah deret harus non-negatif.");
+            input.close();
+            return;
+        }
+
+        System.out.print("Deret Fibonacci : ");
+
+        // Menampilkan deret dan menjumlahkannya secara visual
+        int totalSum = 0;
+        for (int i = 0; i < N; i++) {
+            int fibValue = fibonacci(i);
+            System.out.print(fibValue);
+            
+            totalSum += fibValue;
+
+            if (i < N - 1) {
+                System.out.print(" + ");
+            }
+        }
+        
+        // Hasil penjumlahan menggunakan fungsi rekursif sumFibonacci
+        // int hasilPenjumlahan = sumFibonacci(N - 1); // Indeks deret dimulai dari 0 hingga N-1
+
+        System.out.println(" = " + totalSum);
+        // System.out.println("Hasil penjumlahan (menggunakan fungsi rekursif) : " + hasilPenjumlahan);
+        
+        input.close();
+    }
+}
